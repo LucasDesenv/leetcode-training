@@ -35,7 +35,67 @@ public class MostFrequentIp {
     System.out.println(mostFrequentIps_MaxHeap(ips_2));
     System.out.println(mostFrequentIps_HashMap(ips_2));
 
+    System.out.println(topKFrequent_bucketStrategy(new int[]{1,2,2,3,3,3}, 2));
 
+  }
+
+  /**
+   * Given an integer array nums and an integer k, return the k most frequent elements within the array.
+   * @param nums
+   * @param k
+   * @return
+   */
+  public static int[] topKFrequent_bucketStrategy(int[] nums, int k) {
+
+    List<Integer>[] buckets = new List[nums.length + 1];
+
+    for (int i = 0; i < buckets.length; i++){
+      buckets[i] = new ArrayList<>(); //initialize the buckets with empty array
+    }
+
+    Map<Integer, Integer> frequencies = new HashMap<>();
+    for (int num : nums) {
+      frequencies.put(num, frequencies.getOrDefault(num, 0) + 1); //calculate the frequencies
+    }
+
+    for (Map.Entry<Integer, Integer> entry : frequencies.entrySet()){
+      buckets[entry.getValue()].add(entry.getKey()); //feed my bucket based on the counter. The highest frequency will be the last index.
+    }
+
+    int[] result = new int[k];
+    int index = 0;
+    //reverse from: from the last, as it is the where the highest frequencies are stored.
+    for (int i = buckets.length - 1; i > 0 && index < k; i--){
+      List<Integer> mostFrequentNumbers = buckets[i];
+      for (Integer mostFrequentNumber : mostFrequentNumbers) {
+        result[index++] = mostFrequentNumber;
+        if (index == k){
+          return result;
+        }
+      }
+
+    }
+
+    return result;
+  }
+
+  /**
+   * Given an integer array nums and an integer k, return the k most frequent elements within the array.
+   * @param nums
+   * @param k
+   * @return
+   */
+  public static int[] topKFrequent(int[] nums, int k) {
+    Map<Integer, Integer> frequencies = new HashMap<>();
+    for (int num : nums) {
+      frequencies.put(num, frequencies.getOrDefault(num, 0) + 1);
+    }
+
+    return frequencies.entrySet()
+      .stream().sorted((a,b) -> b.getValue().compareTo(a.getValue()))
+      .limit(k)
+      .mapToInt(Map.Entry::getKey)
+      .toArray();
   }
 
   private static List<String> mostFrequentIps_HashMap(List<String> logs) { //O(n + m log m)
