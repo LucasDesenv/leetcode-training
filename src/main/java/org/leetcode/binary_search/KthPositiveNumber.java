@@ -1,5 +1,8 @@
 package org.leetcode.binary_search;
 
+/**
+ * https://leetcode.com/problems/kth-missing-positive-number
+ */
 public class KthPositiveNumber {
   public static void main(String[] args) {
     System.out.println("Should be 6 : " + findKthPositive(new int[]{1,2,3,4}, 2));
