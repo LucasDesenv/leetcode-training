@@ -12,7 +12,7 @@ public class LongestSubstringWithoutRepeating {
     System.out.println("Should be 1 : " + lengthOfLongestSubstring_bruteForce("bbbbb"));
     System.out.println("Should be 3 : " + lengthOfLongestSubstring_bruteForce("pwwkew"));
     System.out.println("Should be 5 : " + lengthOfLongestSubstring_bruteForce("abccjklm"));
-    System.out.println("Should be 3 : " + lengthOfLongestSubstring_bruteForce("dvdf"));
+    System.out.println("Should be 3 : " + lengthOfLongestSubstring_slidingWindow("dvdf"));
   }
   public static int lengthOfLongestSubstring_slidingWindow(String s) { // o(n)
     if (s == null || s.isEmpty()) {
