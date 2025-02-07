@@ -23,36 +23,21 @@ public class ReverseLinkedList {
     head.next = new ListNode(2);
 //    head.next.next = new ListNode(3);
 //    head.next.next.next = new ListNode(4);
-    System.out.println(reverseList(head));
+    ListNode x = reverseList(head);
+    System.out.println(x);
   }
   public static ListNode reverseList(ListNode head) {
-    ListNode current = head;
-    ListNode previous = null;
 
-    while (current != null) {
-      ListNode temp = current.next;
-      current.next = previous;
-      previous = current;
-      current = temp;
+    ListNode prev = null;
+    ListNode curr = head;
+
+    while (curr != null) {
+      ListNode temp = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = temp;
     }
 
-    /**
-     * is my head/current null ? head : continue
-     *
-     * 0, 1, 2, 3
-     *
-     * var previous = head; //0
-     * var current = head.current; //1
-     *
-     * head = current; //[1, 1, 2, 3]
-     * head.current = previous; //[1, 0, 2, 3]
-     *
-     *
-     *
-     *
-     *
-     */
-
-    return previous;
+    return prev;
   }
 }
