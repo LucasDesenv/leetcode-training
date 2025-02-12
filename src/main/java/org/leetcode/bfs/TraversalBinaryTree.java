@@ -1,4 +1,6 @@
-package org.leetcode.dfs;
+package org.leetcode.bfs;
+
+import org.leetcode.dfs.TreeNode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
