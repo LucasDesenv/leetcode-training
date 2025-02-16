@@ -14,8 +14,30 @@ public class RemoveNodeFromLinkedList {
     ListNode listNode = removeNthFromEnd(head, 2);
     System.out.println(listNode);
 
+
   }
 
+  public static ListNode removeSpecificNode(ListNode head, int value) {
+    if (head == null || head.next == null) {
+      return head;
+    }
+
+    if (head.val == value) {
+      return head.next;
+    }
+
+    ListNode current = head;
+
+    while (current.next != null){
+      if (current.next.val == value){
+        current.next = current.next.next;
+        break;
+      }
+      current = current.next;
+    }
+
+    return head;
+  }
   public static ListNode removeNthFromEnd(ListNode head, int n) {
     if (head == null){
       return null;
