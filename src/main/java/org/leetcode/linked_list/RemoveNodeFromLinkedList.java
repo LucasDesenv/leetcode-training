@@ -13,9 +13,36 @@ public class RemoveNodeFromLinkedList {
     head.next.next.next.next.next = new ListNode(6);
     ListNode listNode = removeNthFromEnd(head, 2);
     System.out.println(listNode);
+    ListNode listNode1 = new ListNode(1);
+    listNode1.next = new ListNode(2);
+    listNode1.next.next = new ListNode(7);
+    listNode1.next.next.next = new ListNode(8);
+    System.out.println(removeElements(listNode1, 7));
 
 
   }
+
+  public static ListNode removeElements(ListNode head, int val) {
+    //First cover the corner case where we have all elements equal to val. E.g.: 7, 7, 7, 7
+    while (head != null && head.val == val){
+      head = head.next;
+    }
+
+    if (head == null){
+      return head;
+    }
+
+    ListNode current = head;
+    while (current != null && current.next != null){
+      if (current.next.val == val){ //check if the next is the one to be deleted
+        current.next = current.next.next; //if yes, skip it by getting the next of the next.
+      }else current = current.next; //otherwise keep iterating.
+    }
+
+    return head;
+
+  }
+
 
   public static ListNode removeSpecificNode(ListNode head, int value) {
     if (head == null || head.next == null) {
@@ -31,7 +58,6 @@ public class RemoveNodeFromLinkedList {
     while (current.next != null){
       if (current.next.val == value){
         current.next = current.next.next;
-        break;
       }
       current = current.next;
     }
